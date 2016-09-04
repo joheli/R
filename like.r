@@ -1,0 +1,1 @@
+"%like%" <- function(field, patterns) grepl(paste(patterns, collapse = "|"), field)
