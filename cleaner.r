@@ -1,4 +1,3 @@
-# Version 5, 2016-09-01
 require(dplyr)
 
 .cleaner  <- function(tb, time.col, clean.cols, decreasing = FALSE, 
