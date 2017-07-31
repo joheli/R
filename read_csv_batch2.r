@@ -1,6 +1,6 @@
 # read.csv.batch2
 #
-# Version 0.1
+# Version 0.2
 #
 # Author: Johannes Elias (joheli@gmx.net)
 #
@@ -18,10 +18,11 @@
 #
 
 read.csv.batch2 <- function (file.pattern,
-                            readf = read.csv2, 
-                            path = ".",
-                            file.ending = "csv",
-                            ...) {
+                             readf = read.csv2, 
+                             path = ".",
+                             file.ending = "csv",
+                             na.strings = "",
+                             ...) {
   # file.names: a vector of matching file names
   file.names <- dir(path, paste0(file.pattern, ".*", file.ending, "$"))
   # Stop if no matching files found
@@ -33,7 +34,7 @@ read.csv.batch2 <- function (file.pattern,
     f.name <- file.names[i]
     f.path <- f.name
     if (path != ".") f.path <- paste0(path, f.name)
-    d <- readf(f.path, ...)
+    d <- readf(f.path, na.strings = "", ...)
     df.list[[f.name]] <- d
   }
   return(df.list)

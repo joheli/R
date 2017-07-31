@@ -24,13 +24,13 @@ source("read_csv_batch2.r")
 source("rbinder2.r")
 
 read.rbinder2 <- function(file.pattern,
-                         readf = read.csv2,
-                         path = ".",
-                         file.ending = "csv",
-                         unique.field.name,
-                         result = c("only joined data-frame", 
-                                    "report and data-frame"),
-                         ...) {
+                          readf = read.csv2,
+                          path = ".",
+                          file.ending = "csv",
+                          unique.field.name,
+                          result = c("only joined data-frame", 
+                                     "report and data-frame"),
+                          ...) {
   result = match.arg(result)
   step1 <- read.csv.batch2(file.pattern, 
                            readf, 
