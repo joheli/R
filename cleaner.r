@@ -34,3 +34,20 @@ require(dplyr)
   return(tb)
 }
 
+# EXAMPLE
+#
+# # create test data frame 'test' with fields 'A', 'B', 'C', 'D'
+#
+# test <- data.frame(A = rep(LETTERS[1:10], round(runif(10,1,4))))
+# test$B <- round(runif(nrow(test), 1, 5))
+# test$C <- rnorm(nrow(test))
+# test$D <- as.roman(round(runif(nrow(test), 1, 3)))
+# 
+# # test.c.1 only only unique entries of field "A"
+#
+# test.c.1 <- .cleaner(test, "B", "A")
+#
+# # test.c.2 only contains unique entries of combinations of "A" and "D"
+#
+# test.c.2 <- .cleaner(test, "B", c("A", "D"))
+#
