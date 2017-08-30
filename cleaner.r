@@ -43,7 +43,7 @@ require(dplyr)
 # test$C <- rnorm(nrow(test))
 # test$D <- as.roman(round(runif(nrow(test), 1, 3)))
 # 
-# # test.c.1 only only unique entries of field "A"
+# # test.c.1 only contains unique entries of field "A"
 #
 # test.c.1 <- .cleaner(test, "B", "A")
 #
