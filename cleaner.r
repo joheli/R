@@ -1,3 +1,21 @@
+# Function .cleaner
+#
+# Returns: data.frame with unique occurrences of a field (or fields) designated
+# by clean.cols.
+#
+# Parameters
+#
+#   tb            a data.frame
+#   time.col      character designating a field name which is orderable, i.e. 
+#                 numeric, Date, etc.
+#   clean.cols    character with one or more elements designating field names
+#                 which are to be reduced to unique occurrences in result
+#   decreasing    logical designating whether field designated by time.col
+#                 is to be ordered in decreasing fashion or not.
+#   keepExtraCols logical designating whether a temporary column is to be
+#                 kept - use for debugging only.
+#
+
 require(dplyr)
 
 .cleaner  <- function(tb, time.col, clean.cols, decreasing = FALSE, 
