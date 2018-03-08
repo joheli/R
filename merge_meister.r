@@ -1,12 +1,12 @@
 # Sequentielle Vereinigung mehrerer 'data.frame' Objekte mit der Funktion 'merge'
 #
 # Parameter:
-#	x		Das erste data.frame Objekt; an dieses wird alles angehängt.
-#	ys		Eine Liste von anzuhängenden data.frame Objekten.
+#	x		Das erste data.frame Objekt; an dieses wird alles angehÃ¤ngt.
+#	ys		Eine Liste von anzuhÃ¤ngenden data.frame Objekten.
 #	by.xs	Die einzelnen by.x Argumente (siehe ?merge) welche bei jedem
-#			Anhängeschritt genutzt werden; können verschiedene sein, siehe Test)
+#			AnhÃ¤ngeschritt genutzt werden; kÃ¶nnen verschiedene sein, siehe Test)
 #	by.ys	Die einzelnen by.y Argumente (siehe ?merge).
-#	...		Wird an 'merge' übergeben.
+#	...		Wird an 'merge' Ã¼bergeben.
 
 merge.meister <- function(x, ys, by.xs, by.ys,...) {
 	# Argumentevaluation
@@ -19,18 +19,14 @@ merge.meister <- function(x, ys, by.xs, by.ys,...) {
 		stop(err.ys)
 	}
 
-	# by.xs und by.ys werden auf die Länge der Liste ys gebracht (hier wird nur der erste Eintrag gezählt)
+	# by.xs und by.ys werden auf die LÃ¤nge der Liste ys gebracht (hier wird nur der erste Eintrag gezÃ¤hlt)
 	if (length(by.xs) < l) by.xs <- rep(by.xs[1],l)
 	if (length(by.ys) < l) by.ys <- rep(by.ys[1],l)
 	d <- x
 
-	# Sequentielles Anhängen jedes data.frame Objektes in ys
+	# Sequentielles AnhÃ¤ngen jedes data.frame Objektes in ys
 	for (i in 1:l) d <- merge(d,ys[[i]],by.x=by.xs[i],by.y=by.ys[i],all.x=T,...)
 	
-	# Rückgabe des Ergebnisses
+	# RÃ¼ckgabe des Ergebnisses
 	return(d)
 }
-
-# # Test
-# load("merge_meister.rda")
-# tmp.mrg <- merge.meister(x=tmp1,ys=list(tmp2,tmp3),by.xs=c("AUFTRAGNR","EINSCODE"),by.ys=c("AUFTRAGNR","einscode"))
