@@ -9,7 +9,7 @@
 # 
 # Arguments
 #   df.list             a list containing named data frames
-#   unique.field.name   character specifying the column name identifying unique entries
+#   unique.field.name   character specifying the column name(s) identifying unique entries
 # 
 # Returns
 #   a list containing the merged data.frame and a report detailing the unique contributions of each data.frame.
