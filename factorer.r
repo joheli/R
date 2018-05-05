@@ -1,25 +1,21 @@
-# 'factorer' (see below) is a function returning alternative (sets of) labels for a column of a data.frame
-# based on supplied regex patterns. It is most useful for cleaning up dirty data, where entries like e.g.
-# 'E. coli', 'E.coli', 'E coli', and 'Escherichia coli' (all matching the pattern '^E.*coli$' are to be 
-# merged to a single category.
-#
-# 'factorer' (see below) uses either the function 'replace.all' or 'replace.all.or', which both replace
-# given patterns in a character vector. Despite their similar function, 'replace.all.or' replaces one 
-# pattern after the other from top to bottom, allowing patterns down the list to override (hence 
-# the suffix '.or') patterns further up; e.g. pattern 'test' is superseded by pattern 'test abc', 
-# if 'test.abc' occurs further down the list.
-# Also, 'replace.all.or' is quicker than 'replace.all'. Nevertheless, both function can be used by 'factorer'; 
-# if override is not required, 'replace.all' is the right choice.
+# factorer (see below) uses either function replace.all or replace.all.or, which both replace
+# given patterns in a character vector. Despite their similar function, replace.all.or behaves
+# differently, in that it replaces one after the other pattern from top to bottom, allowing
+# patterns down the list to override (hence the suffix '.or') patterns further up; e.g. pattern
+# 'test' will be superseded by pattern 'test abc', if latter pattern occurs further down the list.
+# Also, despite its application of a loop, replace.all.or is quicker than replace.all. Nevertheless,
+# both functions can be used; if override is not required, replace.all is the right choice.
 
-# 'replace.all.or' is a function to replace multiple patterns in a character vector; in contrast to 'replace.all' 
-# similar patterns are (partly) overridden by those following them, i.e. a pattern at the top is superseded
+# function to replace multiple patterns in a character vector; in contrast to replace.all 
+# similar patterns are (partly) overridden by those following them, i.e. a pattern at the top is replaced
 # by an overlapping pattern at the bottom of the list. This is useful if a general category is
 # to be preserved along with an important subcategory; e.g. to preserve both the more general
 # category 'Klebsiella species' (designating the biologic genus) as well as the category 
-# 'Klebsiella pneumoniae' (designating the species), pattern 'Klebsiella' (which matches all Klebsiella) 
-# is partly overridden by pattern 'Klebsiella pneumoniae' (which matches all Klebsiella pneumoniae); thus, 
-# the resulting column will list both 'Klebsiella' (labelling all Klebsiella which are not K. pneumoniae) and 
-# 'Klebsiella pneumoniae'.
+# 'Klebsiella pneumoniae' (designating the species),
+# pattern 'Klebsiella' (which matches all Klebsiella) is partly overridden by
+# pattern 'Klebsiella pneumoniae' (which matches all Klebsiella pneumoniae); thus, the resulting
+# column contains both 'Klebsiella' (labelling all Klebsiella which are not K. pneumoniae) and 
+# 'Klebsiella pneumoniae'
 #
 # Arguments
 #
@@ -63,8 +59,7 @@ replace.all.or <- function(target,
   return(result)
 }
 
-# 'replace.all' is an alternative function to replace multiple patterns in a character vector; see
-# above for its differences to 'replace.all.or'.
+# function to replace multiple patterns in a character vector
 #
 # Arguments
 #
@@ -141,20 +136,19 @@ replace.all <- function(target,
   return(res)
 }
 
-# 'factorer' is a function to replace multiple patterns in a character vector using a control table 
-# containing patterns in the first column and corresponding (rowwise) replacements in any number of 
-# further columnns.
+# function to replace multiple patterns in a character vector using a control table containing
+# patterns in the first column and corresponding (rowwise) replacements in any number of further
+# columnns.
 #
 # Arguments
 #
-#   f             character vector where replacements are to take place
-#   fm            data.frame containing control table; first column contains regex patterns that are
-#                 sought in f; further column contains replacements; in the most simple case
-#                 fm contains of only two columns with the first column harbouring patterns and
-#                 the second column specifying replacements. If more than one replacement column is 
-#                 given, additional columns are returned applying those.
-#   replace.func  the replace function, either replace.all or replace.all.or
-#   ...           arguments passed to replace.all or replace.all.or
+#   f       character vector where replacements are to take place
+#   fm      data.frame containing control table; first column contains regex patterns that are
+#           sought in f; further column contains replacements; in the most simple case
+#           fm contains of only two columns with the first column harbouring patterns and
+#           the second column specifying replacements. If more than one replacement column is 
+#           given, additional columns are returned applying those.
+#   ...     arguments passed on to replace.all
 #
 # Return value
 #
@@ -180,7 +174,7 @@ factorer <- function(f, fm, replace.func = replace.all.or, ...) {
   # recursive function performing replacements according to columns given in 
   # replacementsx; each replacement column yields a result column containing
   # replacements according to patterns
-  replacer <- function(rx, result = res, ...) {
+  replacer <- function(rx, result = res) {
     # ra: helper function using replace.all
     ra <- function(r) list(replace.func(f, patterns, r, ...))
     if (is.null(dim(rx))) {
