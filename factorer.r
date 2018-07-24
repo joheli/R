@@ -1,3 +1,5 @@
+# factorer: a collection of functions to execute pattern search and replacement in a character vector.
+
 # factorer (see below) uses either function replace.all or replace.all.or, which both replace
 # given patterns in a character vector. Despite their similar function, replace.all.or behaves
 # differently, in that it replaces one after the other pattern from top to bottom, allowing
@@ -6,11 +8,11 @@
 # Also, despite its application of a loop, replace.all.or is quicker than replace.all. Nevertheless,
 # both functions can be used; if override is not required, replace.all is the right choice.
 
-# function to replace multiple patterns in a character vector; in contrast to replace.all 
+# replace.all.or: a function to replace multiple patterns in a character vector; in contrast to replace.all 
 # similar patterns are (partly) overridden by those following them, i.e. a pattern at the top is replaced
 # by an overlapping pattern at the bottom of the list. This is useful if a general category is
 # to be preserved along with an important subcategory; e.g. to preserve both the more general
-# category 'Klebsiella species' (designating the biologic genus) as well as the category 
+# category 'Klebsiella species' (designating the biological genus) as well as the category 
 # 'Klebsiella pneumoniae' (designating the species),
 # pattern 'Klebsiella' (which matches all Klebsiella) is partly overridden by
 # pattern 'Klebsiella pneumoniae' (which matches all Klebsiella pneumoniae); thus, the resulting
@@ -59,7 +61,7 @@ replace.all.or <- function(target,
   return(result)
 }
 
-# function to replace multiple patterns in a character vector
+# replace.all: a function to replace multiple patterns in a character vector
 #
 # Arguments
 #
@@ -136,7 +138,7 @@ replace.all <- function(target,
   return(res)
 }
 
-# function to replace multiple patterns in a character vector using a control table containing
+# factorer: a function to replace multiple patterns in a character vector using a control table containing
 # patterns in the first column and corresponding (rowwise) replacements in any number of further
 # columnns.
 #
